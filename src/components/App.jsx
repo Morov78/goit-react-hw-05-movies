@@ -2,7 +2,7 @@ import { fetchMovies } from 'api';
 import { Home } from 'page/Home';
 import { Movies } from 'page/Movies';
 import { MovieItem } from 'components/MovieItem/MovieItem';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Layout } from './Layout';
 import { MovieItemCast } from './MovieItem/MovieItemCast/MovieItemCast';
