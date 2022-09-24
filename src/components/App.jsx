@@ -1,32 +1,43 @@
+import { fetchMovies } from 'api';
 import { Home } from 'page/Home';
 import { Movies } from 'page/Movies';
+import { MovieItem } from 'components/MovieItem/MovieItem';
+import { useEffect, useRef, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-// import { Layout } from './Layout';
-import { StyledLink, Container, Nav } from './Layoutstyled';
-export const App = () => {
-  return (
-    <Container>
-      <header>
-        <Nav>
-          <StyledLink to="/">Home</StyledLink>
-          <StyledLink to="/movies">Movies</StyledLink>
-        </Nav>
-      </header>
-      <Routes>
-        <Route path="/" element={<Home />} />
+import { Layout } from './Layout';
+import { MovieItemCast } from './MovieItem/MovieItemCast/MovieItemCast';
+import axios from 'axios';
 
-        {/* <Route index element={<Home />} /> */}
-        <Route path="/movies" element={<Movies />} />
+const BASE_URL = 'https://api.themoviedb.org/3/';
+const API_KEY = '092bcb29ccd47efc5792e9a4733d23fe';
+
+export const App = () => {
+  const [dataMovies, setDataMovies] = useState(null);
+
+  useEffect(() => {
+    const fetch = async () => {
+      const responce = await axios(
+        `${BASE_URL}trending/movie/day?api_key=${API_KEY}`
+      );
+      setDataMovies(responce.data.results);
+    };
+    console.log('Mouting phase: same when componentDidMount runs');
+
+    fetch();
+  }, []);
+
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home movies={dataMovies} />} />
+          <Route path="/movies" element={<Movies />} />
+          <Route path="/movies:movieid" element={<MovieItem />}>
+            <Route path="cast" element={<MovieItemCast />} />
+            <Route path="reviews" element={<div>reviews</div>} />
+          </Route>
+        </Route>
       </Routes>
-    </Container>
+    </>
   );
 };
-
-// Маршрути
-// У застосунку повинні бути такі маршрути. Якщо користувач зайшов за неіснуючим маршрутом, його необхідно перенаправляти на домашню сторінку.
-
-// '/' – компонент Home, домашня сторінка зі списком популярних кінофільмів.
-// '/movies' – компонент Movies, сторінка пошуку кінофільмів за ключовим словом.
-// '/movies/:movieId' – компонент MovieDetails, сторінка з детальною інформацією про кінофільм.
-// /movies/:movieId/cast – компонент Cast, інформація про акторський склад. Рендериться на сторінці MovieDetails.
-// /movies/:movieId/reviews – компонент Reviews, інформація про огляди. Рендериться на сторінці MovieDetails.
