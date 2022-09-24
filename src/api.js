@@ -20,5 +20,11 @@ async function fetchMovieCredits(id) {
   );
   return responce;
 }
+async function fetchMovieReviews(id) {
+  const responce = await axios(
+    `${BASE_URL}movie/${id}/reviews?api_key=${API_KEY}`
+  );
+  return responce;
+}
 
-export { fetchMovies, fetchMoviesById, fetchMovieCredits };
+export { fetchMovies, fetchMoviesById, fetchMovieCredits, fetchMovieReviews };
