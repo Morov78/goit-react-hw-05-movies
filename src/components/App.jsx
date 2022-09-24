@@ -9,13 +9,12 @@ import { MovieItemCast } from './MovieItem/MovieItemCast/MovieItemCast';
 
 export const App = () => {
   const [dataMovies, setDataMovies] = useState(null);
-  const fetch = useRef(false);
+
   useEffect(() => {
     console.log('Mouting phase: same when componentDidMount runs');
 
     fetchMovies().then(responce => {
       setDataMovies(responce.data.results);
-      fetch.current = true;
     });
   }, []);
 
