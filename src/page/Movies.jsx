@@ -9,23 +9,31 @@ import { Outlet, useSearchParams } from 'react-router-dom';
 export const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+
   const query = searchParams.get('query');
-  console.log(query);
+
   const handleSubmit = searchQuery => {
     if (searchQuery !== '' && searchQuery !== query) {
       setSearchParams({ query: searchQuery });
+      window.sessionStorage.setItem('searchQuery', JSON.stringify(searchQuery));
     }
   };
 
   useEffect(() => {
     if (!query) {
+      const searchQuery = JSON.parse(
+        window.sessionStorage.getItem('searchQuery')
+      );
+      if (searchQuery) {
+        setSearchParams({ query: searchQuery });
+      }
       return;
     }
-    console.log('query=', query, 'length', query.length);
+
     fetchSearchMovie(query).then(data => {
       setMovies(data.data.results);
     });
-  }, [query]);
+  }, [query, setSearchParams]);
 
   return (
     <main>

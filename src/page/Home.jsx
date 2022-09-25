@@ -6,8 +6,6 @@ export const Home = () => {
   const [movies, setMovies] = useState(null);
 
   useEffect(() => {
-    console.log('Mouting phase: same when componentDidMount runs');
-
     fetchMovies().then(responce => {
       setMovies(responce.data.results);
     });

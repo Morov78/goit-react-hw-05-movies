@@ -16,7 +16,6 @@ export const StyledLinkBack = styled(NavLink)`
 
   :hover,
   :focus {
-    color: blue;
     text-decoration: underline;
   }
 `;

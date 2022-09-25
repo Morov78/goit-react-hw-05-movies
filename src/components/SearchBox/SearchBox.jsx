@@ -1,4 +1,5 @@
 import search from './search.png';
+import { List } from './SearchBox.styled';
 export const SearchBox = ({ onSubmit }) => {
   const handleSubmit = event => {
     event.preventDefault();
@@ -12,16 +13,13 @@ export const SearchBox = ({ onSubmit }) => {
   return (
     <>
       <form autoComplete="off" onSubmit={handleSubmit}>
-        <label>
+        <List>
           <input type="text" name="query"></input>
-        </label>
-        <button type="submit" style={{ width: '22px', height: '22px' }}>
-          <img
-            src={search}
-            style={{ width: '14px', height: '14px' }}
-            alt="icon search"
-          />
-        </button>
+
+          <button type="submit">
+            <img src={search} alt="icon search" />
+          </button>
+        </List>
       </form>
     </>
   );
