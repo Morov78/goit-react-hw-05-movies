@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 export const MovieList = ({ movies }) => {
   const location = useLocation();
   console.log(location);
-  if (movies.length === 0) {
+  if (!movies) {
     return;
   }
   const { pathname, search } = location;
