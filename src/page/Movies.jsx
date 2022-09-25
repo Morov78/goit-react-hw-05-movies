@@ -1,12 +1,35 @@
+import { fetchSearchMovie } from 'api';
+import { MovieList } from 'components/MovieList/MovieList';
 import { SearchBox } from 'components/SearchBox/SearchBox';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
-import { Outlet } from 'react-router-dom';
+import { Outlet, useSearchParams } from 'react-router-dom';
 
 export const Movies = () => {
+  const [movies, setMovies] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get('query');
+
+  const handleSubmit = searchQuery => {
+    if (searchQuery !== '' && searchQuery !== query) {
+      setSearchParams({ query: searchQuery });
+    }
+  };
+
+  useEffect(() => {
+    if (!query) {
+      return;
+    }
+    fetchSearchMovie(query).then(data => {
+      setMovies(data.data.results);
+    });
+  }, [query]);
+
   return (
     <main>
-      <SearchBox />
-
+      <SearchBox onSubmit={handleSubmit} />
+      <MovieList movies={movies} />
       <Outlet />
     </main>
   );
