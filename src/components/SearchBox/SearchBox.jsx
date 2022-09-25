@@ -1,3 +1,4 @@
+import search from './search.png';
 export const SearchBox = ({ onSubmit }) => {
   const handleSubmit = event => {
     event.preventDefault();
@@ -10,11 +11,17 @@ export const SearchBox = ({ onSubmit }) => {
   };
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form autoComplete="off" onSubmit={handleSubmit}>
         <label>
           <input type="text" name="query"></input>
         </label>
-        <button type="submit"></button>
+        <button type="submit" style={{ width: '22px', height: '22px' }}>
+          <img
+            src={search}
+            style={{ width: '14px', height: '14px' }}
+            alt="icon search"
+          />
+        </button>
       </form>
     </>
   );

@@ -15,12 +15,10 @@ export const MovieItem = data => {
 
   const location = useLocation();
   const backLocation = useRef(location.state.from);
-  const id = useRef(location.state.id);
-  // console.log(id.current);
-  // console.log('back=', backLocation);
+  const id = location.state.id;
 
   useEffect(() => {
-    fetchMoviesById(id.current).then(data => {
+    fetchMoviesById(id).then(data => {
       setMovieId(data.data);
     });
   }, []);
@@ -56,18 +54,12 @@ export const MovieItem = data => {
         </div>
       </Box>
 
-      <h3>Additional information</h3>
       <BoxInfo>
-        <StyledLink
-          to="cast"
-          state={{ from: { backLocation }, id: id.current }}
-        >
+        <h3>Additional information</h3>
+        <StyledLink to="cast" state={{ from: { backLocation }, id: id }}>
           Cast
         </StyledLink>
-        <StyledLink
-          to="reviews"
-          state={{ from: { backLocation }, id: id.current }}
-        >
+        <StyledLink to="reviews" state={{ from: { backLocation }, id: id }}>
           Reviews
         </StyledLink>
       </BoxInfo>

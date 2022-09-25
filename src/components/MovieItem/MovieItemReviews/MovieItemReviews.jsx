@@ -19,11 +19,11 @@ export const MovieItemReviews = () => {
     return;
   }
 
-  if (reviews.length === 0) {
-    return <div>We don't have ant reviews for this movie.</div>;
-  }
   return (
     <List>
+      {reviews.length === 0 && (
+        <div>We don't have ant reviews for this movie.</div>
+      )}
       {reviews.map(({ author, content }, index) => {
         return (
           <li key={index}>

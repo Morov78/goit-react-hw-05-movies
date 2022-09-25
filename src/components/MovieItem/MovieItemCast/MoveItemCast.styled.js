@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const List = styled.ul`
+  padding-left: 15px;
   list-style-type: none;
   display: grid;
   grid-template-columns: repeat(auto-fill, 150px);

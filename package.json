@@ -1,5 +1,5 @@
 {
-  "name": "react-homework-template",
+  "name": "goit-react-hw-05-movies",
   "version": "0.1.0",
   "private": true,
   "homepage": "https://morov78.github.io/goit-react-hw-05-movies/",
@@ -8,11 +8,14 @@
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
+    "localforage": "^1.10.0",
+    "match-sorter": "^6.3.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-icons": "^4.4.0",
     "react-router-dom": "^6.4.1",
     "react-scripts": "5.0.1",
+    "sort-by": "^1.2.0",
     "styled-components": "^5.3.5",
     "web-vitals": "^2.1.3"
   },

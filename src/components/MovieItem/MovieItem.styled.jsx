@@ -2,24 +2,25 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Section = styled.section`
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-bottom: 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
 `;
 
 export const StyledLinkBack = styled(NavLink)`
+  padding-left: 15px;
   display: block;
   margin-right: auto;
   text-decoration: none;
   color: #000000;
-  :hover {
+
+  :hover,
+  :focus {
     color: blue;
     text-decoration: underline;
   }
 `;
+
 export const StyledLink = styled(NavLink)`
   display: block;
   margin-right: auto;
@@ -27,17 +28,18 @@ export const StyledLink = styled(NavLink)`
   color: #000000;
 
   :hover {
-    color: blue;
     text-decoration: underline;
   }
 
   &.active {
-    color: blue;
+    color: orange;
     text-decoration: underline;
   }
 `;
 
 export const Box = styled.ul`
+  padding-left: 15px;
+  padding-bottom: 15px;
   display: grid;
   grid-gap: 10px;
   grid-template-columns: 200px 1fr;
@@ -58,6 +60,7 @@ export const Box = styled.ul`
 `;
 
 export const BoxInfo = styled.ul`
+  padding-left: 15px;
   display: flex;
   gap: 4px;
   padding-bottom: 15px;

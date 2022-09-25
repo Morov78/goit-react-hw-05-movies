@@ -23,7 +23,7 @@ export const StyledLink = styled(NavLink)`
 
   :hover,
   :focus {
-    color: blue;
+    color: orange;
     text-decoration: underline;
   }
 `;

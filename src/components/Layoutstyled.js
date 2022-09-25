@@ -1,4 +1,3 @@
-import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -14,13 +13,18 @@ export const Nav = styled.nav`
   display: flex;
   gap: 20px;
   border-bottom: 3px solid #e9e9e9;
-`;
 
-export const StyledLink = styled(NavLink)`
-  text-decoration: none;
-  color: black;
+  a {
+    text-decoration: none;
+    color: black;
 
-  &.active {
-    color: orange;
+    &.active {
+      color: orange;
+      text-decoration: underline;
+    }
+    &:not(active):hover,
+    &:not(active):focus {
+      text-decoration: underline;
+    }
   }
 `;
