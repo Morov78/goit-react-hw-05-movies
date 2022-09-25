@@ -8,10 +8,6 @@ export const MovieList = ({ movies }) => {
 
   return (
     <List>
-      {search !== '' && movies.length === 0 && (
-        <p>No found movies on this query</p>
-      )}
-
       {movies &&
         movies.map(({ id, name, title }) => (
           <StyledLink
@@ -23,6 +19,10 @@ export const MovieList = ({ movies }) => {
             {name || title}
           </StyledLink>
         ))}
+
+      {search !== '' && movies.length === 0 && (
+        <p>No found movies on this query</p>
+      )}
     </List>
   );
 };

@@ -21,7 +21,7 @@ export const MovieItem = data => {
     fetchMoviesById(id).then(data => {
       setMovieId(data.data);
     });
-  }, []);
+  }, [id]);
 
   if (!movieId) {
     return;

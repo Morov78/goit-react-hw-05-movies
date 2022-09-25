@@ -9,7 +9,7 @@ export const List = styled.div`
   gap: 4px;
 
   & input {
-    padding:1px 8px;
+    padding: 1px 8px;
     width: 200px;
     border-radius: 3px;
     border-width: 1px;
@@ -30,7 +30,11 @@ export const List = styled.div`
   }
 
   img {
-    width: 18px; height: 18px }
-
+    width: 18px;
+    height: 18px;
+    transition: transform 300ms;
+  }
+  img:hover {
+    transform: scale(1.2);
   }
 `;
