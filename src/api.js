@@ -30,7 +30,7 @@ async function fetchMovieReviews(id) {
 
 async function fetchSearchMovie(query) {
   const responce = await axios(
-    `${BASE_URL}search/movie/?api_key=${API_KEY}&query=${query}`
+    `${BASE_URL}search/movie/?query=${query}&api_key=${API_KEY}`
   );
   return responce;
 }

@@ -10,7 +10,7 @@ export const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query');
-
+  console.log(query);
   const handleSubmit = searchQuery => {
     if (searchQuery !== '' && searchQuery !== query) {
       setSearchParams({ query: searchQuery });
@@ -21,6 +21,7 @@ export const Movies = () => {
     if (!query) {
       return;
     }
+    console.log('query=', query, 'length', query.length);
     fetchSearchMovie(query).then(data => {
       setMovies(data.data.results);
     });
