@@ -9,6 +9,7 @@ import { Outlet, useSearchParams } from 'react-router-dom';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const query = searchParams.get('query');
@@ -32,16 +33,18 @@ const Movies = () => {
 
       return;
     }
-
+    setIsLoading('pending');
     fetchSearchMovie(query).then(data => {
       setMovies(data.data.results);
+      setIsLoading('resolved');
     });
   }, [query, setSearchParams]);
 
   return (
     <main>
       <SearchBox onSubmit={handleSubmit} />
-      <MovieList movies={movies} />
+      {isLoading === 'pending' && <Loader />}
+      {isLoading === 'resolved' && <MovieList movies={movies} />}
 
       <Suspense fallback={<Loader />}>
         <Outlet />
