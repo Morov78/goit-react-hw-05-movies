@@ -1,6 +1,7 @@
 import { List, StyledLink } from './MovieList.styled';
 import { VscCircleFilled } from 'react-icons/vsc';
 import { useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 export const MovieList = ({ movies }) => {
   const location = useLocation();
@@ -25,4 +26,8 @@ export const MovieList = ({ movies }) => {
       )}
     </List>
   );
+};
+
+MovieList.prototype = {
+  movies: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 };

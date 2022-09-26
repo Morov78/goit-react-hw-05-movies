@@ -1,4 +1,4 @@
-import { fetchSearchMovie } from 'api';
+import { fetchSearchMovie } from 'services/api';
 import { Loader } from 'components/Loader/Loader';
 import { MovieList } from 'components/MovieList/MovieList';
 import { SearchBox } from 'components/SearchBox/SearchBox';
@@ -25,9 +25,11 @@ const Movies = () => {
       const searchQuery = JSON.parse(
         window.sessionStorage.getItem('searchQuery')
       );
+
       if (searchQuery) {
         setSearchParams({ query: searchQuery });
       }
+
       return;
     }
 
@@ -40,6 +42,7 @@ const Movies = () => {
     <main>
       <SearchBox onSubmit={handleSubmit} />
       <MovieList movies={movies} />
+
       <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>

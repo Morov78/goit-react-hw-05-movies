@@ -16,8 +16,9 @@ export const List = styled.div`
     height: 19px;
   }
   & button {
-    border: 1px solid #000000;
-    border-radius: 3px;
+    ${'' /* border: 1px solid #000000; */}
+    ${'' /* border-radius: 3px; */}
+    border: none;
     width: 22px;
     height: 22px;
     display: flex;

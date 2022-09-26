@@ -1,4 +1,4 @@
-import { fetchMovieReviews } from 'api';
+import { fetchMovieReviews } from 'services/api';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { List } from './MovieItemReviews.styled';
@@ -12,6 +12,7 @@ const MovieItemReviews = () => {
     if (!!reviews) {
       return;
     }
+
     fetchMovieReviews(id).then(data => setReviews(data.data.results || []));
   }, [id, reviews]);
 

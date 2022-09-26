@@ -1,4 +1,4 @@
-import { fetchMovies } from 'api';
+import { fetchMovies } from 'services/api';
 import { MovieList } from 'components/MovieList/MovieList';
 import { useEffect, useState } from 'react';
 

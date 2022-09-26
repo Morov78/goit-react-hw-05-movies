@@ -1,6 +1,25 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
+export const Placeholder = styled.div`
+  width: 200px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+
+  & figure {
+    margin: 0;
+    background-size: 200px 300px;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+  & img {
+    width: 200px;
+    height: 300px;
+  }
+`;
+
 export const Section = styled.section`
   display: flex;
   flex-direction: column;
@@ -44,10 +63,12 @@ export const Box = styled.ul`
   grid-template-columns: 200px 1fr;
   border-bottom: 3px solid #e9e9e9;
 
-  & img {
+  ${
+    '' /* & img {
     display: block;
     width: 200px;
     height: 300px;
+  } */
   }
   & h2 {
     margin-bottom: 30px;

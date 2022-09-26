@@ -1,12 +1,16 @@
-import search from './search.png';
+import search from '../../images/search.png';
 import { List } from './SearchBox.styled';
+import PropTypes from 'prop-types';
+
 export const SearchBox = ({ onSubmit }) => {
   const handleSubmit = event => {
     event.preventDefault();
     const searchQuery = event.currentTarget.query.value.trim();
+
     if (searchQuery === '') {
       return;
     }
+
     onSubmit(searchQuery);
     event.currentTarget.reset();
   };
@@ -23,4 +27,8 @@ export const SearchBox = ({ onSubmit }) => {
       </form>
     </>
   );
+};
+
+SearchBox.prototype = {
+  onSubmit: PropTypes.func.isRequired,
 };
