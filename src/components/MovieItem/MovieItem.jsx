@@ -1,5 +1,5 @@
 import { fetchMoviesById } from 'api';
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import {
   Section,
@@ -9,8 +9,9 @@ import {
   BoxInfo,
 } from './MovieItem.styled';
 import { TiArrowBack } from 'react-icons/ti';
+import { Loader } from 'components/Loader/Loader';
 
-export const MovieItem = data => {
+const MovieItem = data => {
   const [movieId, setMovieId] = useState(null);
 
   const location = useLocation();
@@ -63,8 +64,11 @@ export const MovieItem = data => {
           Reviews
         </StyledLink>
       </BoxInfo>
-
-      <Outlet />
+      <Suspense fallback={<Loader />}>
+        <Outlet />
+      </Suspense>
     </Section>
   );
 };
+
+export default MovieItem;

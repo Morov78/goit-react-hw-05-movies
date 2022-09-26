@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { List } from './MovieItemReviews.styled';
 
-export const MovieItemReviews = () => {
+const MovieItemReviews = () => {
   const [reviews, setReviews] = useState(null);
   const location = useLocation();
   const id = location.state.id;
@@ -35,3 +35,5 @@ export const MovieItemReviews = () => {
     </List>
   );
 };
+
+export default MovieItemReviews;

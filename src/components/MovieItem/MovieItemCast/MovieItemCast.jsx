@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { List } from './MoveItemCast.styled';
 import { BiFemale, BiMale, BiGroup } from 'react-icons/bi';
 
-export const MovieItemCast = () => {
+const MovieItemCast = () => {
   const [cast, setCast] = useState(null);
   const location = useLocation();
   const id = location.state.id;
@@ -45,4 +45,5 @@ export const MovieItemCast = () => {
     </List>
   );
 };
-// gender 2 чоловік 1 жінка
+
+export default MovieItemCast;

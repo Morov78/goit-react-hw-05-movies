@@ -1,12 +1,13 @@
 import { fetchSearchMovie } from 'api';
+import { Loader } from 'components/Loader/Loader';
 import { MovieList } from 'components/MovieList/MovieList';
 import { SearchBox } from 'components/SearchBox/SearchBox';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { useState } from 'react';
 
 import { Outlet, useSearchParams } from 'react-router-dom';
 
-export const Movies = () => {
+const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -39,7 +40,11 @@ export const Movies = () => {
     <main>
       <SearchBox onSubmit={handleSubmit} />
       <MovieList movies={movies} />
-      <Outlet />
+      <Suspense fallback={<Loader />}>
+        <Outlet />
+      </Suspense>
     </main>
   );
 };
+
+export default Movies;

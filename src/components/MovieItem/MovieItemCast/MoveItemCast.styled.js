@@ -11,6 +11,9 @@ export const List = styled.ul`
     width: 140px;
     height: 210px;
   }
+
+  & img::before {
+  }
   & h3 {
     font-size: 16px;
   }
