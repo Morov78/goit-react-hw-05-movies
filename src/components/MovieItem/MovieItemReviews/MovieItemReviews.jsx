@@ -14,7 +14,7 @@ const MovieItemReviews = () => {
     }
 
     fetchMovieReviews(id).then(data => setReviews(data.data.results || []));
-  }, [id, reviews]).catch(error => console(error));
+  }, [id, reviews]);
 
   if (!reviews) {
     return;
