@@ -1,4 +1,4 @@
-import { fetchMovies } from 'services/api';
+import { fetchTrendMovies } from 'services/api';
 import { MovieList } from 'components/MovieList/MovieList';
 import { useEffect, useState } from 'react';
 import { Loader } from 'components/Loader/Loader';
@@ -9,7 +9,7 @@ const Home = () => {
 
   useEffect(() => {
     setIsLoading('pending');
-    fetchMovies()
+    fetchTrendMovies()
       .then(responce => {
         setMovies(responce.data.results);
         setIsLoading('resolved');

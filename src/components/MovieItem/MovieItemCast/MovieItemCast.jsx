@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { fetchMovieCredits } from 'services/api';
+import { fetchMovieById } from 'services/api';
 import { List, Placeholder } from './MoveItemCast.styled';
 import { BiFemale, BiMale, BiGroup } from 'react-icons/bi';
 import AtomImage from '@s-ui/react-atom-image';
@@ -18,7 +18,7 @@ const MovieItemCast = () => {
       return;
     }
 
-    fetchMovieCredits(id).then(data => setCast(data.data.cast || []));
+    fetchMovieById(id, 'credits').then(data => setCast(data.data.cast || []));
   }, [cast, id]);
 
   if (!cast) {

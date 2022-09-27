@@ -1,4 +1,4 @@
-import { fetchMoviesById } from 'services/api';
+import { fetchMovieById } from 'services/api';
 import { Suspense, useEffect, useRef, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 
@@ -24,8 +24,8 @@ const MovieItem = () => {
   const id = location.state.id;
 
   useEffect(() => {
-    fetchMoviesById(id).then(data => {
-      setMovieId(data.data).catch(error => console(error));
+    fetchMovieById(id).then(data => {
+      setMovieId(data.data);
     });
   }, [id]);
 
