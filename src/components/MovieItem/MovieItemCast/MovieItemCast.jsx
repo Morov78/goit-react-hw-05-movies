@@ -19,7 +19,7 @@ const MovieItemCast = () => {
     }
 
     fetchMovieCredits(id).then(data => setCast(data.data.cast || []));
-  }, [cast, id]);
+  }, [cast, id]).catch(error => console(error));
 
   if (!cast) {
     return;

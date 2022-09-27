@@ -17,6 +17,8 @@ const Movies = () => {
   const handleSubmit = searchQuery => {
     if (searchQuery !== '' && searchQuery !== query) {
       setSearchParams({ query: searchQuery });
+      setMovies([]);
+      setIsLoading(false);
       window.sessionStorage.setItem('searchQuery', JSON.stringify(searchQuery));
     }
   };
@@ -29,16 +31,40 @@ const Movies = () => {
 
       if (searchQuery) {
         setSearchParams({ query: searchQuery });
+
+        const storageMovies = JSON.parse(
+          window.sessionStorage.getItem('searchMovies')
+        );
+        setMovies(storageMovies);
       }
 
       return;
     }
-    setIsLoading('pending');
-    fetchSearchMovie(query).then(data => {
-      setMovies(data.data.results);
+    if (movies.length !== 0) {
       setIsLoading('resolved');
-    });
-  }, [query, setSearchParams]);
+      return;
+    }
+    setIsLoading('pending');
+
+    fetchSearchMovie(query)
+      .then(data => {
+        setMovies(data.data.results);
+
+        window.sessionStorage.setItem(
+          'searchMovies',
+          JSON.stringify(data.data.results)
+        );
+        if (data.data.total_result === 0) {
+          setIsLoading('rejected');
+          setSearchParams({ query: '' });
+          setMovies([]);
+
+          return;
+        }
+        setIsLoading('resolved');
+      })
+      .catch(error => console(error));
+  }, [query, movies, setSearchParams, isLoading]);
 
   return (
     <main>

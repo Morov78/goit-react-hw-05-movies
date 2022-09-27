@@ -9,10 +9,12 @@ const Home = () => {
 
   useEffect(() => {
     setIsLoading('pending');
-    fetchMovies().then(responce => {
-      setMovies(responce.data.results);
-      setIsLoading('resolved');
-    });
+    fetchMovies()
+      .then(responce => {
+        setMovies(responce.data.results);
+        setIsLoading('resolved');
+      })
+      .catch(error => console(error));
   }, []);
 
   return (

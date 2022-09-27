@@ -25,7 +25,7 @@ const MovieItem = () => {
 
   useEffect(() => {
     fetchMoviesById(id).then(data => {
-      setMovieId(data.data);
+      setMovieId(data.data).catch(error => console(error));
     });
   }, [id]);
 
