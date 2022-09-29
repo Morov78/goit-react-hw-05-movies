@@ -1,4 +1,4 @@
-import { fetchSearchMovie } from 'services/api';
+import { fetchMovieByQuery } from 'services/api';
 import { Loader } from 'components/Loader/Loader';
 import { MovieList } from 'components/MovieList/MovieList';
 import { SearchBox } from 'components/SearchBox/SearchBox';
@@ -34,7 +34,7 @@ const Movies = () => {
       return;
     }
     setIsLoading('pending');
-    fetchSearchMovie(query).then(data => {
+    fetchMovieByQuery(query).then(data => {
       setMovies(data.data.results);
       setIsLoading('resolved');
     });

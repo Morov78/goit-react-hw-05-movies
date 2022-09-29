@@ -6,17 +6,16 @@ const API_KEY = '092bcb29ccd47efc5792e9a4733d23fe';
 const fetchAxios = axios.create({
   baseURL: BASE_URL,
   responseType: 'json',
+  params: {
+    api_key: API_KEY,
+  },
 });
-
-const params = {
-  api_key: API_KEY,
-};
 
 //Запит інформації про популярнці фільми за день
 async function fetchTrendMovies() {
   try {
     const responce = await fetchAxios('trending/movie/day', {
-      params: { ...params, page: 1 },
+      params: { page: 1 },
     });
     return responce;
   } catch (error) {
@@ -25,15 +24,29 @@ async function fetchTrendMovies() {
 }
 
 //запит інформації про фільм по id
-// arg: "" або відсутній - запит повної інформації про фільм по id,
-// "credits" - запит інформації про акторський склад для сторінки кінофільму по id
-// "reviews" -запит оглядів для сторінки кінофільму по id
-async function fetchMovieById(id, arg = '') {
-  if (arg) {
-    arg = '/' + arg;
-  }
+async function fetchMovieById(id) {
   try {
-    const responce = await fetchAxios(`movie/${id}${arg}`, { params });
+    const responce = await fetchAxios(`movie/${id}`);
+    return responce;
+  } catch (error) {
+    console.log(`Axios request failed ${error}`);
+  }
+}
+
+//запит інформації про акторський склад для сторінки кінофільму по id
+async function fetchCreditsMovieById(id) {
+  try {
+    const responce = await fetchAxios(`movie/${id}/credits`);
+    return responce;
+  } catch (error) {
+    console.log(`Axios request failed ${error}`);
+  }
+}
+
+//запит оглядів для сторінки кінофільму по id
+async function fetchReviewsMovieById(id) {
+  try {
+    const responce = await fetchAxios(`movie/${id}/reviews`);
     return responce;
   } catch (error) {
     console.log(`Axios request failed ${error}`);
@@ -41,10 +54,10 @@ async function fetchMovieById(id, arg = '') {
 }
 
 //запит на пошук фільмів
-async function fetchSearchMovie(query) {
+async function fetchMovieByQuery(query) {
   try {
-    const responce = await fetchAxios(`search/movie?query=${query}`, {
-      params: { ...params, page: 1, include_adult: false },
+    const responce = await fetchAxios('search/movie', {
+      params: { query, page: 1, include_adult: false },
     });
     return responce;
   } catch (error) {
@@ -52,4 +65,10 @@ async function fetchSearchMovie(query) {
   }
 }
 
-export { fetchTrendMovies, fetchMovieById, fetchSearchMovie };
+export {
+  fetchTrendMovies,
+  fetchMovieById,
+  fetchMovieByQuery,
+  fetchCreditsMovieById,
+  fetchReviewsMovieById,
+};

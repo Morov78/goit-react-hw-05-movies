@@ -22,7 +22,6 @@ const Home = () => {
       <h1>Trending today</h1>
       {isLoading === 'pending' && <Loader />}
       {isLoading === 'resolved' && <MovieList movies={movies} />}
-      {/* <MovieList movies={movies} /> */}
     </main>
   );
 };
