@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import { CustomLink } from './CustomLink';
-import { Container, Nav } from './Layoutstyled';
+// import { CustomLink } from './CustomLink';
+import { Container, Nav, StyledLink } from './Layoutstyled';
 import { Loader } from './Loader/Loader';
 
 export const Layout = () => {
@@ -9,9 +9,11 @@ export const Layout = () => {
     <Container>
       <header>
         <Nav>
-          <CustomLink to="/">Home</CustomLink>
+          <StyledLink to="/" end>
+            Home
+          </StyledLink>
 
-          <CustomLink to="/movies">Movies</CustomLink>
+          <StyledLink to="/movies">Movies</StyledLink>
         </Nav>
       </header>
       <Suspense fallback={<Loader />}>
