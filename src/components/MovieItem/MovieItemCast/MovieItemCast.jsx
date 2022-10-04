@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { fetchCreditsMovieById } from 'services/api';
 import { List, Placeholder } from './MoveItemCast.styled';
@@ -10,18 +10,15 @@ import spinner from '../../../images/spinner.svg';
 const MovieItemCast = () => {
   const [cast, setCast] = useState(null);
 
-  const location = useLocation();
-  const id = location.state.id;
+  const { movieId } = useParams();
 
   useEffect(() => {
     if (!!cast) {
       return;
     }
 
-    fetchCreditsMovieById(id, 'credits').then(data =>
-      setCast(data.data.cast || [])
-    );
-  }, [cast, id]);
+    fetchCreditsMovieById(movieId).then(data => setCast(data.data.cast || []));
+  }, [cast, movieId]);
 
   if (!cast) {
     return;

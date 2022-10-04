@@ -1,6 +1,6 @@
 import { fetchMovieById } from 'services/api';
 import { Suspense, useEffect, useRef, useState } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
 
 import {
   Section,
@@ -17,32 +17,33 @@ import spinner from '../../images/spinner.svg';
 import placeholder from '../../images/placeholder.png';
 
 const MovieItem = () => {
-  const [movieId, setMovieId] = useState(null);
+  const [movie, setMovie] = useState(null);
 
   const location = useLocation();
   const backLocation = useRef(location.state.from);
-  const id = location.state.id;
+  const { movieId } = useParams();
 
   useEffect(() => {
-    fetchMovieById(id).then(data => {
-      setMovieId(data.data);
+    // console.log(id);
+    fetchMovieById(movieId).then(data => {
+      setMovie(data.data);
     });
-  }, [id]);
+  }, [movieId]);
 
   const getParamByMovie = () => {
-    const pathImage = movieId.poster_path
-      ? `https://image.tmdb.org/t/p/w500/${movieId.poster_path}`
+    const pathImage = movie.poster_path
+      ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
       : placeholder;
-    const votePercentage = Math.round(movieId.vote_average * 10);
-    const releaseDate = new Date(movieId.release_date);
+    const votePercentage = Math.round(movie.vote_average * 10);
+    const releaseDate = new Date(movie.release_date);
     const releaseYear = releaseDate.getFullYear() || 'No data';
     const genres =
-      movieId.genres.map(genre => genre.name).join(' ') || 'No genres';
+      movie.genres.map(genre => genre.name).join(' ') || 'No genres';
 
     return { pathImage, votePercentage, releaseYear, genres };
   };
 
-  if (!movieId) {
+  if (!movie) {
     return;
   }
 
@@ -57,20 +58,16 @@ const MovieItem = () => {
 
       <Box>
         <Placeholder>
-          <AtomImage
-            src={pathImage}
-            alt={movieId.title}
-            placeholder={spinner}
-          />
+          <AtomImage src={pathImage} alt={movie.title} placeholder={spinner} />
         </Placeholder>
 
         <div>
           <h2>
-            {movieId.title} ({releaseYear})
+            {movie.title} ({releaseYear})
           </h2>
           <p>User Score: {votePercentage}%</p>
           <h3> Overview</h3>
-          <p>{movieId.overview || 'No data'}</p>
+          <p>{movie.overview || 'No data'}</p>
           <h3> Genres</h3>
           <p>{genres}</p>
         </div>
@@ -78,10 +75,10 @@ const MovieItem = () => {
 
       <BoxInfo>
         <h3>Additional information</h3>
-        <StyledLink to="cast" state={{ from: backLocation.current, id: id }}>
+        <StyledLink to="cast" state={{ from: backLocation.current }}>
           Cast
         </StyledLink>
-        <StyledLink to="reviews" state={{ from: backLocation.current, id: id }}>
+        <StyledLink to="reviews" state={{ from: backLocation.current }}>
           Reviews
         </StyledLink>
       </BoxInfo>

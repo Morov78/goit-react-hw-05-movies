@@ -12,8 +12,8 @@ export const MovieList = ({ movies }) => {
       {movies &&
         movies.map(({ id, name, title }) => (
           <StyledLink
-            to={`/movies:${id}`}
-            state={{ from: { pathname, search }, id }}
+            to={`/movies/${id}`}
+            state={{ from: { pathname, search } }}
             key={id}
           >
             <VscCircleFilled size="14px" />

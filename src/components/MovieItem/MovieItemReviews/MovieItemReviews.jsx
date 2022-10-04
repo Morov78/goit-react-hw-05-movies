@@ -1,20 +1,22 @@
 import { fetchReviewsMovieById } from 'services/api';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { List } from './MovieItemReviews.styled';
 
 const MovieItemReviews = () => {
   const [reviews, setReviews] = useState(null);
-  const location = useLocation();
-  const id = location.state.id;
+
+  const { movieId } = useParams();
 
   useEffect(() => {
     if (!!reviews) {
       return;
     }
 
-    fetchReviewsMovieById(id).then(data => setReviews(data.data.results || []));
-  }, [id, reviews]);
+    fetchReviewsMovieById(movieId).then(data =>
+      setReviews(data.data.results || [])
+    );
+  }, [movieId, reviews]);
 
   if (!reviews) {
     return;
