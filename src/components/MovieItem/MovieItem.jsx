@@ -20,11 +20,12 @@ const MovieItem = () => {
   const [movie, setMovie] = useState(null);
 
   const location = useLocation();
-  const backLocation = useRef(location.state.from);
+
+  const backLocation = useRef(location.state?.from || '/');
+
   const { movieId } = useParams();
 
   useEffect(() => {
-    // console.log(id);
     fetchMovieById(movieId).then(data => {
       setMovie(data.data);
     });
